@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "7b3f4c51-abe0-41b7-abe2-f69a122a209d",
+		"_postman_id": "5e923dd5-e305-405f-9f51-82fd8a0aab9b",
 		"name": "Air-Book",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "19647940"
@@ -169,7 +169,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{accessToken}}",
+									"value": "{{bearerToken}}",
 									"type": "string"
 								}
 							]
@@ -197,7 +197,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{accessToken}}",
+									"value": "{{bearerToken}}",
 									"type": "string"
 								}
 							]
@@ -226,7 +226,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{accessToken}}",
+									"value": "{{bearerToken}}",
 									"type": "string"
 								}
 							]
@@ -255,7 +255,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{accessToken}}",
+									"value": "{{bearerToken}}",
 									"type": "string"
 								}
 							]
@@ -292,7 +292,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{accessToken}}",
+									"value": "{{bearerToken}}",
 									"type": "string"
 								}
 							]
@@ -330,7 +330,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{accessToken}}",
+									"value": "{{bearerToken}}",
 									"type": "string"
 								}
 							]
@@ -368,7 +368,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{accessToken}}",
+									"value": "{{bearerToken}}",
 									"type": "string"
 								}
 							]
@@ -397,7 +397,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{accessToken}}",
+									"value": "{{bearerToken}}",
 									"type": "string"
 								}
 							]
@@ -434,7 +434,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{accessToken}}",
+									"value": "{{bearerToken}}",
 									"type": "string"
 								}
 							]
@@ -475,7 +475,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{accessToken}}",
+									"value": "{{bearerToken}}",
 									"type": "string"
 								}
 							]
@@ -514,7 +514,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{accessToken}}",
+									"value": "{{bearerToken}}",
 									"type": "string"
 								}
 							]
@@ -547,7 +547,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{accessToken}}",
+									"value": "{{bearerToken}}",
 									"type": "string"
 								}
 							]
@@ -605,7 +605,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{accessToken}}",
+									"value": "{{bearerToken}}",
 									"type": "string"
 								}
 							]
@@ -642,7 +642,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{accessToken}}",
+									"value": "{{bearerToken}}",
 									"type": "string"
 								}
 							]
@@ -676,7 +676,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{accessToken}}",
+									"value": "{{bearerToken}}",
 									"type": "string"
 								}
 							]
@@ -871,6 +871,23 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [

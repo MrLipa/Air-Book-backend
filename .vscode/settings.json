@@ -28,6 +28,8 @@
     ".env.local": "key",
     ".env.docker": "key",
     ".env.github": "key",
+    ".env.json": "key",
+    ".env": "key",
     "*.gpg": "lock"
   },
   "material-icon-theme.hidesExplorerArrows": true,

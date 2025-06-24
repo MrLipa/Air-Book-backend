@@ -146,22 +146,6 @@ services:
     networks:
       - app-network
 
-  frontend:
-    build:
-      context: ../frontend
-      dockerfile: Dockerfile
-    user: root
-    restart: always
-    privileged: true
-    depends_on:
-      - backend
-    ports:
-      - "127.0.0.1:5173:5173"
-    env_file:
-      - .env
-    networks:
-      - app-network
-
 volumes:
   portainer_data:
   grafana_data:

@@ -41,7 +41,9 @@ app.use('/', express.static(path.join(__dirname, '/')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.get('/', (req, res) => {
-  res.status(200).render('index');
+  res.status(200).render('index', {
+    appName: process.env.APP_AIR_BOOK_NAME || ''
+  });
 });
 
 // Public Routes

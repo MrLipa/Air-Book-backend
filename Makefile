@@ -44,15 +44,6 @@ help:
 	@echo -e "  $(GREEN)make encrypt-env name=.env$(RESET)        - Encrypt .env to .env.gpg"
 	@echo -e "  $(GREEN)make decrypt-env name=.env$(RESET)        - Decrypt .env.gpg to .env"
 
-encrypt-env:
-	tar czvf env.tar.gz env && gpg -c env.tar.gz && rm env.tar.gz
-
-decrypt-env:
-	gpg -d env.tar.gz.gpg > env.tar.gz && tar xzvf env.tar.gz && rm env.tar.gz
-
-git:
-	git add --all && git commit -m"little changes" && git push
-
 install:
 	npm install
 
