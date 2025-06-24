@@ -44,6 +44,9 @@ help:
 	@echo -e "  $(GREEN)make encrypt-env name=.env$(RESET)        - Encrypt .env to .env.gpg"
 	@echo -e "  $(GREEN)make decrypt-env name=.env$(RESET)        - Decrypt .env.gpg to .env"
 
+decrypt:
+	echo "$$GIT_CRYPT_KEY" | base64 -d > git-crypt-key && git-crypt unlock git-crypt-key
+
 install:
 	npm install
 
