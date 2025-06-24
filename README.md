@@ -5,7 +5,7 @@ ogólne zużycie memrory w czasie
 cpu
 time series bar podział na get i inne
 
- 
+  
   
 get latency
 patch latency
