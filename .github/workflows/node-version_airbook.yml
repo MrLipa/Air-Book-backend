@@ -21,10 +21,13 @@ jobs:
         run: make decrypt
         env:
           GIT_CRYPT_KEY: ${{ secrets.GIT_CRYPT_KEY }}
+  
+      - name: Ustaw .env z env/.env.github
+        run: cp env/.env.github .env
 
-      - name: Show APP_AIR_BOOK_NAME from decrypted env
+      - name: Show APP_AIR_BOOK_NAME from .env
         run: |
-          echo "APP_AIR_BOOK_NAME = $(grep APP_AIR_BOOK_NAME env/.env.docker | cut -d '=' -f2 | xargs)"
+          echo "APP_AIR_BOOK_NAME = $(grep APP_AIR_BOOK_NAME .env | cut -d '=' -f2 | xargs)"
 
   build:
     runs-on: ubuntu-latest
@@ -44,6 +47,9 @@ jobs:
         run: make decrypt
         env:
           GIT_CRYPT_KEY: ${{ secrets.GIT_CRYPT_KEY }}
+
+      - name: Ustaw .env z env/.env.github
+        run: cp env/.env.github .env
 
       - name: Set up Node.js version
         uses: actions/setup-node@v3
@@ -80,16 +86,6 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
-
-      - name: Install tools
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y git-crypt make
-
-      - name: Odszyfruj secrets (Makefile)
-        run: make decrypt
-        env:
-          GIT_CRYPT_KEY: ${{ secrets.GIT_CRYPT_KEY }}
 
       - name: Login to Azure
         uses: azure/login@v2
