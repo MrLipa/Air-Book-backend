@@ -1,3 +1,11 @@
+name: Build and deploy Node.js app to Azure Web App - AirBook
+
+on:
+  push:
+    branches:
+      - node-version
+  workflow_dispatch:
+
 jobs:
   decrypt:
     runs-on: ubuntu-latest
