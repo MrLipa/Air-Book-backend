@@ -2,7 +2,3 @@ node_modules
 logs
 docs
 .idea
-.env*
-!.env.gpg
-!.env.docker.gpg
-!.env.production.gpg
