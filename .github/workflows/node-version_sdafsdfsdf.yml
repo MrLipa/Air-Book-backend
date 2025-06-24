@@ -31,10 +31,6 @@ jobs:
       - name: Ustaw .env z env/.env.github
         run: cp env/.env.github .env
 
-      - name: Show APP_AIR_BOOK_NAME from .env
-        run: |
-          echo "APP_AIR_BOOK_NAME = $(grep APP_AIR_BOOK_NAME .env | cut -d '=' -f2 | xargs)"
-
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
