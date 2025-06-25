@@ -1,0 +1,34 @@
+{
+  "recommendations": [
+    // === Podstawowe narzędzia ===
+    "mikestead.dotenv",                           // Support for .env files
+    "redhat.vscode-yaml",                         // YAML support
+    "pkief.material-icon-theme",                  // Material Icon Theme
+    "ms-vscode-remote.remote-wsl",                // WSL support
+    "tamasfe.even-better-toml",                   // TOML support
+    "ritwickdey.liveserver",                      // Live Server
+    "formulahendry.code-runner",                  // Code Runner (run code snippets)
+    "postman.postman-for-vscode",                 // Postman for VSCode
+
+    // === Python Development ===
+    "ms-python.python",                           // Python support
+    "ms-python.vscode-pylance",                   // Pylance (IntelliSense for Python)
+    "ms-python.debugpy",                          // Python debugger
+    "donjayamanne.python-environment-manager",    // Python Environment Manager
+    "njpwerner.autodocstring",                    // Auto-generate Python docstrings
+    "ms-python.flake8",                           // Flake8 linter support
+    "ms-toolsai.jupyter",                         // Jupyter notebook support
+    "njqdev.vscode-python-typehint",              // Python type hint suggestions
+    "josemurilloc.aura-spirit-dracula",           // Theme with Python support
+
+    // === Node.js & Web Development ===
+    "dbaeumer.vscode-eslint",                     // ESLint
+    "esbenp.prettier-vscode",                     // Prettier
+    "xabikos.javascriptsnippets",                 // JavaScript ES6 Snippets
+    "formulahendry.auto-close-tag",               // Automatically close HTML/JSX tags
+    "formulahendry.auto-rename-tag",              // Automatically rename paired HTML/JSX tags
+    "ecmel.vscode-html-css",                      // HTML/CSS IntelliSense
+    "eg2.vscode-npm-script",                      // npm script IntelliSense
+    "orta.vscode-jest",                           // Jest test runner
+  ]
+}

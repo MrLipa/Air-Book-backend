@@ -1,0 +1,152 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: 'nodeapp'
+    static_configs:
+      - targets: ['backend:3000']
+
+    metric_relabel_configs:
+      # healthCheck (statyczne)
+      - source_labels: [route]
+        regex: ^.*/healthCheck/relationalDatabase$
+        target_label: route_template
+        replacement: /healthCheck/relationalDatabase
+
+      - source_labels: [route]
+        regex: ^.*/healthCheck/neo4jHealth$
+        target_label: route_template
+        replacement: /healthCheck/neo4jHealth
+
+      # register, login, refresh, logout (statyczne)
+      - source_labels: [route]
+        regex: ^.*/register$
+        target_label: route_template
+        replacement: /register
+
+      - source_labels: [route]
+        regex: ^.*/login$
+        target_label: route_template
+        replacement: /login
+
+      - source_labels: [route]
+        regex: ^.*/refreshToken$
+        target_label: route_template
+        replacement: /refreshToken
+
+      - source_labels: [route]
+        regex: ^.*/logout$
+        target_label: route_template
+        replacement: /logout
+
+      # user – statyczne
+      - source_labels: [route]
+        regex: ^.*/user/getAllUsers$
+        target_label: route_template
+        replacement: /user/getAllUsers
+
+      - source_labels: [route]
+        regex: ^.*/user/createNewUser$
+        target_label: route_template
+        replacement: /user/createNewUser
+
+      - source_labels: [route]
+        regex: ^.*/user/createNotification$
+        target_label: route_template
+        replacement: /user/createNotification
+
+      - source_labels: [route]
+        regex: ^.*/user/createReservation$
+        target_label: route_template
+        replacement: /user/createReservation
+
+      # user – z parametrami
+      - source_labels: [route]
+        regex: ^.*/user/getUserById/[^/]+$
+        target_label: route_template
+        replacement: /user/getUserById/{userId}
+
+      - source_labels: [route]
+        regex: ^.*/user/getNotificationsByUserId/[^/]+$
+        target_label: route_template
+        replacement: /user/getNotificationsByUserId/{userId}
+
+      - source_labels: [route]
+        regex: ^.*/user/updateUserById/[^/]+$
+        target_label: route_template
+        replacement: /user/updateUserById/{userId}
+
+      - source_labels: [route]
+        regex: ^.*/user/patchUserById/[^/]+$
+        target_label: route_template
+        replacement: /user/patchUserById/{userId}
+
+      - source_labels: [route]
+        regex: ^.*/user/deleteUserById/[^/]+$
+        target_label: route_template
+        replacement: /user/deleteUserById/{userId}
+
+      - source_labels: [route]
+        regex: ^.*/user/deleteReservationById/[^/]+$
+        target_label: route_template
+        replacement: /user/deleteReservationById/{reservationId}
+
+      # airport (statyczne)
+      - source_labels: [route]
+        regex: ^.*/airport/getAllAirports$
+        target_label: route_template
+        replacement: /airport/getAllAirports
+
+      # flight – statyczne
+      - source_labels: [route]
+        regex: ^.*/flight/getAllFlights$
+        target_label: route_template
+        replacement: /flight/getAllFlights
+
+      - source_labels: [route]
+        regex: ^.*/flight/searchFlights$
+        target_label: route_template
+        replacement: /flight/searchFlights
+
+      - source_labels: [route]
+        regex: ^.*/flight/getFlightsByIds$
+        target_label: route_template
+        replacement: /flight/getFlightsByIds
+
+      # flight – z parametrami
+      - source_labels: [route]
+        regex: ^.*/flight/getFlightsByUserId/[^/]+$
+        target_label: route_template
+        replacement: /flight/getFlightsByUserId/{userId}
+
+      - source_labels: [route]
+        regex: ^.*/flight/patchFlightById/[^/]+$
+        target_label: route_template
+        replacement: /flight/patchFlightById/{flightId}
+
+      # monitoring
+      - source_labels: [route]
+        regex: ^.*/metrics$
+        target_label: route_template
+        replacement: /metrics
+
+      # oauth2 callbacks
+      - source_labels: [route]
+        regex: ^.*/api/auth/facebook/callback$
+        target_label: route_template
+        replacement: /api/auth/facebook/callback
+
+      - source_labels: [route]
+        regex: ^.*/auth/linkedin/callback$
+        target_label: route_template
+        replacement: /auth/linkedin/callback
+
+      - source_labels: [route]
+        regex: ^.*/auth/github/callback$
+        target_label: route_template
+        replacement: /auth/github/callback
+
+      - source_labels: [route]
+        regex: ^.*/auth/azure/callback$
+        target_label: route_template
+        replacement: /auth/azure/callback

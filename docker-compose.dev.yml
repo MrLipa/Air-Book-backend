@@ -1,0 +1,155 @@
+services:
+  loki:
+    image: grafana/loki:3.4.4
+    user: root
+    restart: always
+    privileged: true
+    ports:
+      - "127.0.0.1:3100:3100"
+    networks:
+      - app-network
+
+  promtail:
+    image: grafana/promtail:3.4.4
+    user: root
+    restart: always
+    privileged: true
+    volumes:
+      - ./docker/promtail-config.yaml:/etc/promtail/config.yaml
+      - ./logs:/var/log/backend
+    command: -config.file=/etc/promtail/config.yaml
+    depends_on:
+      - loki
+    networks:
+      - app-network
+
+  prometheus:
+    image: prom/prometheus
+    user: root
+    restart: always
+    privileged: true
+    ports:
+      - "127.0.0.1:9090:9090"
+    volumes:
+      - ./docker/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    networks:
+      - app-network
+
+  influxdb:
+    image: influxdb:1.11.8
+    user: root
+    restart: always
+    privileged: true
+    ports:
+      - "127.0.0.1:8086:8086"
+    environment:
+      - INFLUXDB_DB=k6
+    networks:
+      - app-network
+
+  k6:
+    image: grafana/k6
+    ports:
+      - "127.0.0.1:6565:6565"
+    environment:
+      - K6_OUT=influxdb=http://influxdb:8086/k6
+    volumes:
+      - ./tests/k6:/scripts
+    networks:
+      - app-network
+
+  grafana:
+    image: grafana/grafana:12.0.2
+    user: root
+    restart: always
+    privileged: true
+    ports:
+      - "127.0.0.1:3001:3000"
+    env_file:
+      - .env
+    volumes:
+      - ./docker/dashboards:/var/lib/grafana/dashboards
+      - ./docker/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
+      - ./docker/dashboard.yaml:/etc/grafana/provisioning/dashboards/dashboard.yaml
+    networks:
+      - app-network
+
+  portainer:
+    image: portainer/portainer-ce:2.30.0
+    restart: always
+    privileged: true
+    ports:
+      - "127.0.0.1:9443:9443"
+      - "127.0.0.1:9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      - app-network
+
+  adminer:
+    image: adminer:5.3.0
+    user: root
+    restart: always
+    privileged: true
+    ports:
+      - "127.0.0.1:8081:8080"
+    networks:
+      - app-network
+
+  mysql:
+    build:
+      context: .
+      dockerfile: ./docker/mysql.Dockerfile
+    user: root
+    restart: always
+    privileged: true
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.1:3307:3306"
+    networks:
+      - app-network
+
+  neo4j:
+    build:
+      context: .
+      dockerfile: ./docker/neo4j.Dockerfile
+    user: root
+    restart: always
+    privileged: true
+    ports:
+      - "127.0.0.1:7687:7687"
+      - "127.0.0.1:7474:7474"
+      - "127.0.0.1:7473:7473"
+    command: ['./init-neo4j.sh']
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: .
+      dockerfile: ./docker/backend.Dockerfile
+    user: root
+    restart: always
+    privileged: true
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - mysql
+      - neo4j
+    volumes:
+      - ./src:/usr/src/app/src
+      - ./logs:/usr/src/app/logs
+    env_file:
+      - .env
+    networks:
+      - app-network
+
+volumes:
+  portainer_data:
+  grafana_data:
+
+networks:
+  app-network:
+    driver: bridge
