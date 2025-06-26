@@ -1,7 +1,0 @@
-.gitignore
-.dockerignore
-node_modules
-logs/**
-!logs/.gitkeep
-docs/**
-!docs/.gitkeep
