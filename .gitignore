@@ -3,3 +3,4 @@ logs
 docs
 .idea
 .env
+.venv

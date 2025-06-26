@@ -1,5 +1,8 @@
-fast api tytuł veris doc res doc descinc
+from fastapi import FastAPI
 
-inculde routing 
+app = FastAPI()
 
-starup na init db i if name
+
+@app.get("/")
+def read_hello():
+    return {"message": "Hello, World!"}
